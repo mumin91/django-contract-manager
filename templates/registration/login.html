@@ -1,0 +1,123 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+{% block content %}
+    <section class="section section-shaped section-lg">
+        <div class="container pt-lg-md">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-light-lg">
+
+                        <!-- Image -->
+                        <img src="{% static 'assets/img/photos/photo-2.jpg' %}" alt="..." class="card-img-top">
+
+
+                        <div class="card-body px-lg-5 py-lg-5">
+
+                            <form role="form" method="post">
+                                {% csrf_token %}
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control form-control-flush" id="cardName"
+                                           placeholder="Username" name="username">
+                                    <label for="username">Username</label>
+                                    <div class="text-muted font-italic ">
+                                        {% if form.errors.username %}
+                                            <small>
+                                                <span class="text-danger">{{ form.errors.username }}</span>
+                                            </small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-label-group">
+                                    <input class="form-control form-control-flush" placeholder="Password"
+                                           type="password"
+                                           name="password">
+                                    <label for="username">Password</label>
+                                    <div class="text-muted font-italic ">
+                                        {% if form.errors.password %}
+                                            <small>
+                                                <span class="text-danger">{{ form.errors.password }}</span>
+                                            </small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+
+                                <div class="custom-control custom-control-alternative custom-checkbox">
+                                    <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+                                    <label class="custom-control-label" for=" customCheckLogin">
+                                        <span>Remember me</span>
+                                    </label>
+                                </div>
+                                <div class="text-center">
+                                    <input type="submit" value="Sign in" class="btn btn-primary my-4">
+                                    <input type="hidden" name="next" value="{{ next }}">
+                                </div>
+                                <div class="text-center">
+                                    Don't have an account? Please, <a href="{% url 'signup' %}">Signup</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <a href="{% url 'password_reset' %}" class="text-light">
+                                <small>Forgot password?</small>
+                            </a>
+                        </div>
+                        <div class="col-6 text-right">
+                            <a href="{% url 'signup' %}" class="text-light">
+                                <small>Create new account</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+<div class="card shadow-light-lg">
+
+    <!-- Image -->
+    <img src="../assets/img/photos/photo-2.jpg" alt="..." class="card-img-top">
+
+    <!-- Shape -->
+    <div class="position-relative">
+        <div class="shape shape-bottom shape-fluid-x svg-shim text-white">
+            @@include("../assets/img/shapes/curves/curve-1.svg")
+        </div>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+
+        <!-- Form -->
+        <form>
+            <div class="form-label-group">
+                <input type="text" class="form-control form-control-flush" id="cardName" placeholder="Name">
+                <label for="cardName">Name</label>
+            </div>
+            <div class="form-label-group">
+                <input type="email" class="form-control form-control-flush" id="cardEmail" placeholder="Email">
+                <label for="cardEmail">Email</label>
+            </div>
+            <div class="form-label-group">
+                <input type="password" class="form-control form-control-flush" id="cardPassword" placeholder="Password">
+                <label for="cardPassword">Password</label>
+            </div>
+            <div class="mt-6">
+                <button class="btn btn-block btn-success lift" type="submit">
+                    Download a sample
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form role="form" method="post">
+                            {% csrf_token %}
+                            <div class="form-label-group">
+                                {{ form.username }}
+                                <label for="{{ form.username.id_username }}">Username</label>
+                                <div class="text-muted font-italic ">
+                                    {% if form.errors.username %}
+                                        <small>
+                                            <span class="text-danger">{{ form.errors.username }}</span>
+                                        </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-label-group">
+                                {{ form.first_name }}
+                                <label for="{{ form.username.id_first_name }}">First Name</label>
+                                <div class="text-muted font-italic ">
+                                    {% if form.errors.first_name %}
+                                        <small>
+                                            <span class="text-danger">{{ form.errors.first_name }}</span>
+                                        </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-label-group">
+                                {{ form.last_name }}
+                                <label for="{{ form.username.id_last_name }}">Last Name</label>
+                                <div class="text-muted font-italic ">
+                                    {% if form.errors.last_name %}
+                                        <small>
+                                            <span class="text-danger">{{ form.errors.last_name }}</span>
+                                        </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-label-group">
+                                {{ form.email }}
+                                <label for="{{ form.username.id_email }}">Email</label>
+                                <div class="text-muted font-italic ">
+                                    {% if form.errors.email %}
+                                        <small>
+                                            <span class="text-danger">{{ form.errors.email }}</span>
+                                        </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-label-group">
+                                {{ form.password1 }}
+                                <label for="{{ form.username.id_password1 }}">Password</label>
+                                <div class="text-muted font-italic ">
+                                    {% if form.errors.password1 %}
+                                        <small>
+                                            <span class="text-danger">{{ form.errors.password1 }}</span>
+                                        </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-label-group">
+                                {{ form.password2 }}
+                                <label for="{{ form.username.id_password2 }}">Confirm Password</label>
+                                <div class="text-muted font-italic ">
+                                    {% if form.errors.password2 %}
+                                        <small>
+                                            <span class="text-danger">{{ form.errors.password2 }}</span>
+                                        </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <button class="btn btn-block btn-success lift" type="submit">
+                                    Sign Up
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
