@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    {% block title %}
+
+    {% endblock %}
+  </title>
+  <!-- Favicon -->
+  <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="{% static 'js/plugins/nucleo/css/nucleo.css' %}" rel="stylesheet" />
+  <link href="{% static 'js/plugins/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="{% static 'css/argon-dashboard.min.css' %}" rel="stylesheet" />
+</head>
+
+<body class="">
+  {% include 'shared/sidenav.html' %}
+  <div class="main-content">
+    <!-- Navbar -->
+      {% include 'shared/navbar.html' %}
+    <!-- End Navbar -->
+    <!-- Header -->
+    {% block body %}
+    
+    {% endblock %}
+  </div>
+  <!--   Core   -->
+  <script src="{% static 'js/plugins/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <!--   Optional JS   -->
+  <script src="{% static 'js/plugins/chart.js/dist/Chart.min.js' %}"></script>
+  <script src="{% static 'js/plugins/chart.js/dist/Chart.extension.js' %}"></script>
+  <!--   Argon JS   -->
+  <script src="{% static 'js/argon-dashboard.min.js?v=1.1.2' %}"></script>
+  {% block script %}
+
+  {% endblock %}
+</body>
+
+</html>
