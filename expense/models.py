@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from datetime import date
 
+from django.urls import reverse
+
 STATUS_CHOICES = [
     ('ongoing', 'Ongoing'),
     ('completed', 'Completed'),
@@ -30,6 +32,19 @@ class Project(models.Model):
     end_date = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # Metadata
+    class Meta:
+        ordering = ['-start_date']
+
+    # Methods
+    def get_absolute_url(self):
+        """Returns the url to access a particular instance of Project."""
+        return reverse('project-detail-view', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Project object (in Admin site etc.)."""
+        return self.title
+
 
 class Expense(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -38,3 +53,16 @@ class Expense(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # Metadata
+    class Meta:
+        ordering = ['-created_at']
+
+    # Methods
+    def get_absolute_url(self):
+        """Returns the url to access a particular instance of Expense."""
+        return reverse('expense-detail-view', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Expense object (in Admin site etc.)."""
+        return self.amount
