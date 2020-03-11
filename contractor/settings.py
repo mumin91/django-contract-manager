@@ -88,8 +88,8 @@ if config('DB_ENGINE') == 'django.db.backends.postgresql':
 else:
     DATABASES = {
         'default': {
-            'ENGINE': config('DB_ENGINE'),
-            'NAME': os.path.join(BASE_DIR, config('DB_NAME')),
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
 
