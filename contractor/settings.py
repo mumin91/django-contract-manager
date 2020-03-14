@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'contractor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if config('DB_ENGINE') == 'django.db.backends.postgresql':
+if config('DB_ENGINE'):
     DATABASES = {
         'default': {
             'ENGINE': config('DB_ENGINE'),
