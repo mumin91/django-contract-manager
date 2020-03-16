@@ -54,7 +54,7 @@
 {#                  <img alt="Image placeholder" src="{% static 'img/theme/team-4-800x800.jpg' %}">#}
                 </span>
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                            <span class="mb-0 text-sm  font-weight-bold">{{user.username}}</span>
                         </div>
                     </div>
                 </a>
@@ -84,12 +84,14 @@
   </div>
   <!--   Core   -->
   <script src="{% static 'js/plugins/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'js/plugins/jquery/dist/jquery.min.js' %}"></script>
   <script src="{% static 'js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
   <!--   Optional JS   -->
   <script src="{% static 'js/plugins/chart.js/dist/Chart.min.js' %}"></script>
   <script src="{% static 'js/plugins/chart.js/dist/Chart.extension.js' %}"></script>
   <!--   Argon JS   -->
   <script src="{% static 'js/argon-dashboard.min.js' %}"></script>
+  <script src="{% static 'js/argon.min.js' %}"></script>
   {% block script %}
 
   {% endblock %}

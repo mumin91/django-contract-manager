@@ -7,7 +7,8 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 
-from expense.models import Project
+from expense.forms import ExpenseCategoryCreateForm
+from expense.models import Project, ExpenseCategory
 
 
 @method_decorator(login_required, name='dispatch')
@@ -41,3 +42,28 @@ class ProjectUpdate(UpdateView):
 class ProjectDelete(DeleteView):
     model = Project
     success_url = reverse_lazy('project_list')
+
+
+class CategoryList(LoginRequiredMixin, ListView):
+    model = ExpenseCategory
+    context_object_name = 'categories'
+    template_name = 'expense/expensecategory_list.html'
+
+
+class CategoryCreate(CreateView):
+    success_url = reverse_lazy('category-list')
+    model = ExpenseCategory
+    fields = ['title']
+    template_name = 'expense/expensecategory_list.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['categories'] = ExpenseCategory.objects.order_by('id')
+        return super(CategoryCreate, self).get_context_data(**kwargs)
+
+
+class CategoryDelete(DeleteView):
+    model = ExpenseCategory
+    success_url = reverse_lazy('category-list')
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
