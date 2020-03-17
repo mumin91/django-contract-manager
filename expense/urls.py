@@ -26,4 +26,9 @@ urlpatterns = [
     # Category URLs
     path('categories/', views.CategoryCreate.as_view(), name='category-list'),
     path('categories/<int:pk>/delete/', views.CategoryDelete.as_view(), name='category-delete'),
+    # Expense URLs
+    # path('expenses/', views.ProjectListView.as_view(), name='project_list'),
+    # path('expenses/add/', views.ProjectCreate.as_view(), name='project-add'),
+    # path('expenses/<int:pk>/update/', views.ProjectUpdate.as_view(), name='project-update'),
+    # path('project/<int:pk>/delete/', views.ProjectDelete.as_view(), name='project-delete'),
 ]

@@ -1,22 +1,16 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 
-# Create your views here.
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 
 from expense.forms import ExpenseCategoryCreateForm
-from expense.models import Project, ExpenseCategory
+from expense.models import *
 
 
-@method_decorator(login_required, name='dispatch')
-class DashboardView(TemplateView):
+class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard.html'
 
 
-# @method_decorator(login_required, name='dispatch')
 class ProjectListView(LoginRequiredMixin, ListView):
     model = Project
     context_object_name = 'projects'
@@ -28,21 +22,30 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
     model = Project
     fields = ['title', 'description', 'status', 'income', 'start_date', 'end_date']
     template_name = 'expense/project_form.html'
+    success_url = reverse_lazy('project_list')
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user
+        form.instance.owner = self.request.user
         return super().form_valid(form)
 
 
 class ProjectUpdate(UpdateView):
     model = Project
     fields = ['title', 'description', 'status', 'income', 'start_date', 'end_date']
+    template_name = 'expense/project_form.html'
+    success_url = reverse_lazy('project_list')
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 
 class ProjectDelete(DeleteView):
     model = Project
     success_url = reverse_lazy('project_list')
 
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
 
 class CategoryList(LoginRequiredMixin, ListView):
     model = ExpenseCategory
@@ -50,7 +53,7 @@ class CategoryList(LoginRequiredMixin, ListView):
     template_name = 'expense/expensecategory_list.html'
 
 
-class CategoryCreate(CreateView):
+class CategoryCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('category-list')
     model = ExpenseCategory
     fields = ['title']
@@ -61,9 +64,31 @@ class CategoryCreate(CreateView):
         return super(CategoryCreate, self).get_context_data(**kwargs)
 
 
-class CategoryDelete(DeleteView):
+class CategoryDelete(LoginRequiredMixin, DeleteView):
     model = ExpenseCategory
     success_url = reverse_lazy('category-list')
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
+
+class ExpenseList(LoginRequiredMixin, ListView):
+    model = Expense
+    context_object_name = 'expenses'
+    template_name = 'expense/expense_list.html'
+    paginate_by = 10
+
+
+class ExpenseCreate(LoginRequiredMixin, CreateView):
+    model = Expense
+
+
+
+
+
+class ExpenseUpdate(LoginRequiredMixin, CreateView):
+    model = Expense
+
+class ExpenseDelete(LoginRequiredMixin, DeleteView):
+    model = Expense
+    success_url = reverse_lazy('expense-list')

@@ -27,7 +27,7 @@ class Project(models.Model):
     description = models.TextField(null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='open')
     income = models.DecimalField(max_digits=10, decimal_places=2)
-    profit = models.DecimalField(max_digits=10, decimal_places=2)
+    profit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     start_date = models.DateField(default=date.today)
     end_date = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)

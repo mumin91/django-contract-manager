@@ -9,5 +9,37 @@
     New Project
 {% endblock %}
 {% block body %}
-    {{ form_as_p }}
+        <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body">
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt--7">
+        <!-- Table -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0 d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0">Projects</h3>
+                        <a href="{% url 'project-add' %}">
+                            <button class="btn">Add Project</button>
+                        </a>
+{#                        <button type="button" class="btn btn-primary my-4" data-toggle="modal" data-target="#createProjectModal" >Add Project</button>#}
+{#                        {% include 'shared/create_project_modal.html' %}#}
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                        <input type="submit" value="submit">
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
