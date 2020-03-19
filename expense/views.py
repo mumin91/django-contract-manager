@@ -47,6 +47,7 @@ class ProjectDelete(DeleteView):
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
+
 class CategoryList(LoginRequiredMixin, ListView):
     model = ExpenseCategory
     context_object_name = 'categories'
@@ -81,14 +82,18 @@ class ExpenseList(LoginRequiredMixin, ListView):
 
 class ExpenseCreate(LoginRequiredMixin, CreateView):
     model = Expense
-
-
-
+    success_url = reverse_lazy('expense-list')
+    fields = ['amount', 'payee', 'category', 'project', ]
+    template_name = 'expense/expense_form.html'
 
 
 class ExpenseUpdate(LoginRequiredMixin, CreateView):
     model = Expense
 
+
 class ExpenseDelete(LoginRequiredMixin, DeleteView):
     model = Expense
     success_url = reverse_lazy('expense-list')
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)

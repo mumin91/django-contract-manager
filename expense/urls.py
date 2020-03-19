@@ -27,8 +27,8 @@ urlpatterns = [
     path('categories/', views.CategoryCreate.as_view(), name='category-list'),
     path('categories/<int:pk>/delete/', views.CategoryDelete.as_view(), name='category-delete'),
     # Expense URLs
-    # path('expenses/', views.ProjectListView.as_view(), name='project_list'),
-    # path('expenses/add/', views.ProjectCreate.as_view(), name='project-add'),
-    # path('expenses/<int:pk>/update/', views.ProjectUpdate.as_view(), name='project-update'),
-    # path('project/<int:pk>/delete/', views.ProjectDelete.as_view(), name='project-delete'),
+    path('expenses/', views.ExpenseList.as_view(), name='expense-list'),
+    path('expenses/add/', views.ExpenseCreate.as_view(), name='expense-add'),
+    path('expenses/<int:pk>/update/', views.ExpenseUpdate.as_view(), name='expense-update'),
+    path('expenses/<int:pk>/delete/', views.ExpenseDelete.as_view(), name='expense-delete'),
 ]
