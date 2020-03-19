@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block title %}
-    Projects
+    Expense
 {% endblock %}
 
 {% block brand %}
-    Expense Categories
+    Expense
 {% endblock %}
 {% block body %}
     <!-- Header -->
@@ -23,7 +23,10 @@
                 <div class="card shadow">
                     <div class="card-header border-0 d-flex justify-content-between align-items-center">
                         <h3 class="mb-0">Expense</h3>
-                        <button type="submit" class="btn btn-primary my-4">Add Expense</button>
+                        <a href="{% url 'expense-add' %}">
+                            <button type="submit" class="btn btn-primary my-4">Add Expense</button>
+
+                        </a>
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
@@ -49,7 +52,7 @@
                                     <td>{{ expense.project.title }}</td>
                                     <td>
                                         <span class="d-inline-block">
-                                               <a href="{% url 'category-delete' category.id %}">
+                                               <a href="{% url 'expense-delete' expense.id %}">
                                                    <i class="fa fa-trash m-1"></i>
                                                </a>
                                         </span>
@@ -58,7 +61,7 @@
                             {% empty %}
                                 <tr>
                                     <td>
-                                        <h2 class="text-center">Sorry, no category in this list.</h2>
+                                        <h2 class="text-center">Sorry, no expense in this list.</h2>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -66,7 +69,7 @@
                         </table>
                     </div>
                     <div class="card-footer py-4">
-                        <nav aria-label="...">
+                        <nav>
                             <ul class="pagination justify-content-end mb-0">
                                 {% if page_obj.has_previous %}
                                     <li class="page-item">
