@@ -16,6 +16,8 @@ class ExpenseCategory(models.Model):
     def __str__(self):
         return self.title
 
+
+
     class Meta:
         ordering = ('title',)
         verbose_name_plural = 'Expense Categories'
@@ -65,4 +67,4 @@ class Expense(models.Model):
 
     def __str__(self):
         """String for representing the Expense object (in Admin site etc.)."""
-        return self.amount
+        return str(self.amount)

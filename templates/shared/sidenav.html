@@ -8,7 +8,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="#">
-            <img src="{% static 'img/brand/blue.png' %}" class="navbar-brand-img" alt="...">
+            <h3 class="text-blue">Contractor System</h3>
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -45,8 +45,9 @@
             <div class="navbar-collapse-header d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="./index.html">
-                            <img src="{% static 'img/brand/blue.png' %}">
+                        <a href="{% url 'dashboard' %}">
+                            Contractor System
+{#                            <img src="{% static 'img/brand/blue.png' %}">#}
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -93,7 +94,7 @@
                 </li>
                 <li class="nav-item  active ">
                     <a class="nav-link  {% if request.resolver_match.url_name == "expense-list" %}active{% endif %}"
-                       href="{% url 'category-list' %}">
+                       href="{% url 'expense-list' %}">
                         <i class="ni ni-album-2 text-primary"></i> Expenses
                     </a>
                 </li>
@@ -101,28 +102,28 @@
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Documentation</h6>
-            <!-- Navigation -->
-            <ul class="navbar-nav mb-md-3">
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-                        <i class="ni ni-spaceship"></i> Getting started
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-                        <i class="ni ni-palette"></i> Foundation
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
-                        <i class="ni ni-ui-04"></i> Components
-                    </a>
-                </li>
-            </ul>
+{#            <h6 class="navbar-heading text-muted">Documentation</h6>#}
+{#            <!-- Navigation -->#}
+{#            <ul class="navbar-nav mb-md-3">#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link"#}
+{#                       href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">#}
+{#                        <i class="ni ni-spaceship"></i> Getting started#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link"#}
+{#                       href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">#}
+{#                        <i class="ni ni-palette"></i> Foundation#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link"#}
+{#                       href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">#}
+{#                        <i class="ni ni-ui-04"></i> Components#}
+{#                    </a>#}
+{#                </li>#}
+{#            </ul>#}
 
         </div>
     </div>

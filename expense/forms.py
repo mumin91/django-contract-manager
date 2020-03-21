@@ -11,3 +11,5 @@ class ExpenseCategoryCreateForm(forms.ModelForm):
         # def __init__(self, *args, **kwargs):
         #     self.user = kwargs.pop('user')
         #     super(ExpenseCategoryCreateForm, self).__init__(*args, **kwargs)
+
+

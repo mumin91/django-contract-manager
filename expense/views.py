@@ -1,14 +1,30 @@
+from datetime import timedelta, datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
+from django.shortcuts import render
 
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
+from django.utils import timezone
+from django.views import View
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from expense.forms import ExpenseCategoryCreateForm
 from expense.models import *
 
 
-class DashboardView(LoginRequiredMixin, TemplateView):
+class DashboardView(LoginRequiredMixin, View):
     template_name = 'dashboard.html'
+
+    def get(self, request):
+        number_of_projects = Project.objects.count()
+        total_expense_last_seven_days = Expense.objects.values('amount').filter(
+            created_at__gte=timezone.now() - timedelta(days=7)).aggregate(total=Sum('amount'))
+
+        context = {
+            "total_number_of_projects": number_of_projects,
+            "total_expense_last_seven_days": total_expense_last_seven_days['total'],
+        }
+        return render(request, self.template_name, context)
 
 
 class ProjectListView(LoginRequiredMixin, ListView):
@@ -87,8 +103,9 @@ class ExpenseCreate(LoginRequiredMixin, CreateView):
     template_name = 'expense/expense_form.html'
 
 
-class ExpenseUpdate(LoginRequiredMixin, CreateView):
+class ExpenseUpdate(LoginRequiredMixin, UpdateView):
     model = Expense
+    fields = ['amount', 'payee', 'category', 'project', ]
 
 
 class ExpenseDelete(LoginRequiredMixin, DeleteView):

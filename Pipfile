@@ -12,6 +12,8 @@ pylint = "*"
 gunicorn = "*"
 whitenoise = "*"
 django-heroku = "*"
+django-crispy-forms = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.8"

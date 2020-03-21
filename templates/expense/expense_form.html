@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Create New Project
@@ -22,15 +23,15 @@
             <div class="col">
                 <div class="card shadow">
                     <div class="card-header border-0 d-flex justify-content-between align-items-center">
-                        <h3 class="mb-0">Projects</h3>
-                        <a href="{% url 'expense-add' %}">
-                            <button class="btn">Add Expense</button>
+                        <h3 class="mb-0">Expenses</h3>
+                         <a href="{% url 'expense-list' %}">
+                            <button class="btn btn-danger my-4">Cancel</button>
                         </a>
                     </div>
                     <div class="card-body">
                         <form method="post">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            {{ form|crispy }}
                         <input type="submit" value="submit">
                         </form>
                     </div>
