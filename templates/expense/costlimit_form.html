@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Create Cost Limit
+{% endblock %}
+
+{% block brand %}
+    New Cost Limit
+{% endblock %}
+{% block body %}
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body">
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt--7">
+        <!-- Table -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0 d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0">Cost Limit</h3>
+                        <a href="{% url 'costlimit-list' %}">
+                            <button class="btn btn-danger">Cancel</button>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <input type="submit" class="btn btn-success" value="Submit">
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

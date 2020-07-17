@@ -114,3 +114,39 @@ class ExpenseDelete(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
+
+class CostLimitList(LoginRequiredMixin, ListView):
+    model = CostLimit
+    context_object_name = 'cost_limits'
+    template_name = 'expense/costlimit_list.html'
+
+
+class CostLimitCreate(LoginRequiredMixin, CreateView):
+    model = CostLimit
+    fields = ['limit', 'category', 'project']
+    template_name = 'expense/costlimit_form.html'
+    success_url = reverse_lazy('costlimit-list')
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+
+class CostLimitUpdate(LoginRequiredMixin, UpdateView):
+    model = CostLimit
+    fields = '__all__'
+    template_name = 'expense/costlimit_form.html'
+    success_url = reverse_lazy('costlimit-list')
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+
+class CostLimitDelete(LoginRequiredMixin, DeleteView):
+    model = CostLimit
+    success_url = reverse_lazy('costlimit-list')
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
