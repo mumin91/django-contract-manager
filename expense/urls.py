@@ -37,4 +37,9 @@ urlpatterns = [
     path('costlimits/add/', views.CostLimitCreate.as_view(), name='costlimit-add'),
     path('costlimits/<int:pk>/update/', views.CostLimitUpdate.as_view(), name='costlimit-update'),
     path('costlimits/<int:pk>/delete/', views.CostLimitDelete.as_view(), name='costlimit-delete'),
+    # Payee URLs
+    path('payees/', views.PayeeList.as_view(), name='payee-list'),
+    path('payees/add/', views.PayeeCreate.as_view(), name='payee-add'),
+    path('payees/<int:pk>/update/', views.PayeeUpdate.as_view(), name='payee-update'),
+    path('payees/<int:pk>/delete/', views.PayeeDelete.as_view(), name='payee-delete'),
 ]

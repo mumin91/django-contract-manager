@@ -98,10 +98,16 @@
                         <i class="ni ni-money-coins text-primary"></i> Expenses
                     </a>
                 </li>
-            <li class="nav-item  active ">
+                <li class="nav-item  active ">
                     <a class="nav-link  {% if request.resolver_match.url_name == "costlimit-list" %}active{% endif %}"
                        href="{% url 'costlimit-list' %}">
                         <i class="ni ni-basket text-primary"></i> Cost Limits
+                    </a>
+                </li>
+                <li class="nav-item  active ">
+                    <a class="nav-link  {% if request.resolver_match.url_name == "payee-list" %}active{% endif %}"
+                       href="{% url 'payee-list' %}">
+                        <i class="ni ni-image text-primary"></i> Payees
                     </a>
                 </li>
             </ul>
