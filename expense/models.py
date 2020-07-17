@@ -16,8 +16,6 @@ class ExpenseCategory(models.Model):
     def __str__(self):
         return self.title
 
-
-
     class Meta:
         ordering = ('title',)
         verbose_name_plural = 'Expense Categories'
@@ -68,3 +66,23 @@ class Expense(models.Model):
     def __str__(self):
         """String for representing the Expense object (in Admin site etc.)."""
         return str(self.amount)
+
+
+class CostLimit(models.Model):
+    limit = models.DecimalField(max_digits=10, decimal_places=2)
+    reached_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    category = models.ForeignKey(ExpenseCategory, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    # Metadata
+    # class Meta:
+    #     ordering = ['-created_at']
+
+    # Methods
+    def get_absolute_url(self):
+        """Returns the url to access a particular instance of Expense."""
+        return reverse('costlimit-detail-view', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Expense object (in Admin site etc.)."""
+        return str(self.limit)
