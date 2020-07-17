@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     path('', views.DashboardView.as_view(), name='dashboard'),
+    # Project URLS
     path('projects/', views.ProjectListView.as_view(), name='project_list'),
     path('project/add/', views.ProjectCreate.as_view(), name='project-add'),
     path('project/<int:pk>/', views.ProjectUpdate.as_view(), name='project-update'),
@@ -31,4 +32,9 @@ urlpatterns = [
     path('expenses/add/', views.ExpenseCreate.as_view(), name='expense-add'),
     path('expenses/<int:pk>/update/', views.ExpenseUpdate.as_view(), name='expense-update'),
     path('expenses/<int:pk>/delete/', views.ExpenseDelete.as_view(), name='expense-delete'),
+    # Cost Limit URLs
+    path('costlimits/', views.CostLimitList.as_view(), name='costlimit-list'),
+    path('costlimits/add/', views.CostLimitCreate.as_view(), name='costlimit-add'),
+    path('costlimits/<int:pk>/update/', views.CostLimitUpdate.as_view(), name='costlimit-update'),
+    path('costlimits/<int:pk>/delete/', views.CostLimitDelete.as_view(), name='costlimit-delete'),
 ]

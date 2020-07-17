@@ -70,7 +70,7 @@ class Expense(models.Model):
 
 class CostLimit(models.Model):
     limit = models.DecimalField(max_digits=10, decimal_places=2)
-    reached_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    reached_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     category = models.ForeignKey(ExpenseCategory, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
