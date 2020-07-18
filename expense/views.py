@@ -150,3 +150,39 @@ class CostLimitDelete(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
+
+class PayeeList(LoginRequiredMixin, ListView):
+    model = Payee
+    context_object_name = 'payees'
+    template_name = 'expense/payee_list.html'
+
+
+class PayeeCreate(LoginRequiredMixin, CreateView):
+    model = Payee
+    fields = '__all__'
+    template_name = 'expense/payee_form.html'
+    success_url = reverse_lazy('payee-list')
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+
+class PayeeUpdate(LoginRequiredMixin, UpdateView):
+    model = Payee
+    fields = '__all__'
+    template_name = 'expense/payee_form.html'
+    success_url = reverse_lazy('payee-list')
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+
+class PayeeDelete(LoginRequiredMixin, DeleteView):
+    model = CostLimit
+    success_url = reverse_lazy('payee-list')
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
