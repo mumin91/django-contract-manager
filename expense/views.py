@@ -1,9 +1,8 @@
-from datetime import timedelta, datetime
+from datetime import timedelta
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.shortcuts import render
-
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
@@ -190,7 +189,11 @@ class PayeeDelete(LoginRequiredMixin, DeleteView):
 
 
 def expense_list(request):
-    f = ExpenseFilter(request.GET, queryset=Expense.objects.all())
-    expenses = f.qs.order_by('project', 'category', 'amount').annotate(total_amount=Sum('amount'))#.distinct().aggregate(Sum('amount', distinct=True))
+    expenses = ''
+    f = ''
+    if 'project' or 'payee' or 'category' in request.GET:
+        f = ExpenseFilter(request.GET, queryset=Expense.objects.all())
+        expenses = f.qs.order_by('project', 'category', 'amount').annotate(
+            total_amount=Sum('amount'))
     return render(request, 'expense/expense_filter.html', {'filter': f,
                                                            'expenses': expenses})
