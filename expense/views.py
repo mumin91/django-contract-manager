@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
+from expense.filters import ExpenseFilter
 from expense.models import *
 
 
@@ -186,3 +187,10 @@ class PayeeDelete(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
+
+def expense_list(request):
+    f = ExpenseFilter(request.GET, queryset=Expense.objects.all())
+    expenses = f.qs.order_by('project', 'category', 'amount').annotate(total_amount=Sum('amount'))#.distinct().aggregate(Sum('amount', distinct=True))
+    return render(request, 'expense/expense_filter.html', {'filter': f,
+                                                           'expenses': expenses})

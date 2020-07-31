@@ -50,12 +50,21 @@ class Payee(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
 
+    # Methods
+    def get_absolute_url(self):
+        """Returns the url to access a particular instance of Expense."""
+        return reverse('payee-list', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Expense object (in Admin site etc.)."""
+        return str(self.name)
+
 
 class Expense(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payee = models.ForeignKey(Payee, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(ExpenseCategory, on_delete=models.CASCADE, null=True)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
