@@ -1,14 +1,15 @@
-from datetime import timedelta, datetime
+from datetime import timedelta
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from django.shortcuts import render
-
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
+from expense.filters import ExpenseFilter
+from expense.forms import ExpenseFilterForm
 from expense.models import *
 
 
@@ -186,3 +187,36 @@ class PayeeDelete(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
+
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
+
+def expense_list(request):
+    form = ExpenseFilterForm
+    expenses = ''
+    # if 'project' or 'payee' or 'category' in request.GET:
+    if request.GET.__len__() > 0:
+        expenses = Expense.objects.all()
+
+        if 'project' in request.GET and is_valid_queryparam(request.GET.get('project')):
+            q = request.GET.get('project')
+            expenses.filter(project__id__iexact=q).prefetch_related('project',
+                                                                    'payee',
+                                                                    'category').all()
+
+        if 'payee' in request.GET and is_valid_queryparam(request.GET.get('payee')):
+            q = request.GET.get('payee')
+            expenses.filter(payee__id__iexact=q).prefetch_related('project',
+                                                                  'payee',
+                                                                  'category').all()
+
+        if 'category' in request.GET and is_valid_queryparam(request.GET.get('category')):
+            q = request.GET.get('category')
+            expenses.filter(category__id=q).prefetch_related('project', 'payee', 'category').all()
+
+        expenses.annotate(Sum('amount', distinct=True))
+
+    return render(request, 'expense/expense_filter.html', {'expenses': expenses,
+                                                           'form': form})

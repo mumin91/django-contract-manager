@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'expense.apps.ExpenseConfig',
-    'crispy_forms', #Crispy forms
+    'crispy_forms',  # Crispy forms app
+    'django_filters', # Django filter app
 ]
 
 MIDDLEWARE = [
@@ -141,8 +142,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
-
-#Crispy forms settings
+# Crispy forms settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_CLASS_CONVERTERS = {'dateinput': "datepicker"}
 

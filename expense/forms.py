@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import ExpenseCategory
+from .models import ExpenseCategory, Expense
 
 
 class ExpenseCategoryCreateForm(forms.ModelForm):
@@ -13,3 +13,8 @@ class ExpenseCategoryCreateForm(forms.ModelForm):
         #     super(ExpenseCategoryCreateForm, self).__init__(*args, **kwargs)
 
 
+class ExpenseFilterForm(forms.ModelForm):
+
+    class Meta:
+        model = Expense
+        fields = ['project', 'category', 'payee']

@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django_filters.views import FilterView
+
 from . import views
+from .models import Expense
 
 urlpatterns = [
     path('', views.DashboardView.as_view(), name='dashboard'),
@@ -42,4 +45,6 @@ urlpatterns = [
     path('payees/add/', views.PayeeCreate.as_view(), name='payee-add'),
     path('payees/<int:pk>/update/', views.PayeeUpdate.as_view(), name='payee-update'),
     path('payees/<int:pk>/delete/', views.PayeeDelete.as_view(), name='payee-delete'),
+    # Filter URLs
+    path('expense/filter/', views.expense_list),
 ]
