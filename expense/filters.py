@@ -13,4 +13,8 @@ class ExpenseFilter(django_filters.FilterSet):
 
     class Meta:
         model = Expense
-        fields = ['project', 'payee', 'category', ]
+        fields = [
+            "project",
+            "payee",
+            "category",
+        ]

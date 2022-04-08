@@ -6,21 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('expense', '0002_remove_project_short_description'),
+        ("expense", "0002_remove_project_short_description"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='expense',
-            options={'ordering': ['-created_at']},
+            name="expense",
+            options={"ordering": ["-created_at"]},
         ),
         migrations.AlterModelOptions(
-            name='project',
-            options={'ordering': ['-start_date']},
+            name="project",
+            options={"ordering": ["-start_date"]},
         ),
         migrations.AlterField(
-            model_name='project',
-            name='profit',
+            model_name="project",
+            name="profit",
             field=models.DecimalField(decimal_places=2, default=0, max_digits=10),
         ),
     ]
