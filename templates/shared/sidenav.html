@@ -110,6 +110,12 @@
                         <i class="ni ni-image text-primary"></i> Payees
                     </a>
                 </li>
+                <li class="nav-item  active ">
+                    <a class="nav-link  {% if request.resolver_match.url_name == "expense_report" %}active{% endif %}"
+                       href="{% url 'expense_report' %}">
+                        <i class="ni ni-image text-primary"></i> Expense Report
+                    </a>
+                </li>
             </ul>
             <!-- Divider -->
             <hr class="my-3">
