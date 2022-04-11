@@ -1,14 +1,13 @@
 from datetime import timedelta
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Sum, Q
+from django.db.models import Sum
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from expense.filters import ExpenseFilter
 from expense.forms import ExpenseFilterForm
 from expense.models import *
 
@@ -20,8 +19,8 @@ class DashboardView(LoginRequiredMixin, View):
         number_of_projects = Project.objects.count()
         total_expense_last_seven_days = (
             Expense.objects.values("amount")
-            .filter(created_at__gte=timezone.now() - timedelta(days=7))
-            .aggregate(total=Sum("amount"))
+                .filter(created_at__gte=timezone.now() - timedelta(days=7))
+                .aggregate(total=Sum("amount"))
         )
 
         context = {
@@ -208,30 +207,26 @@ def is_valid_queryparam(param):
 
 def expense_list(request):
     form = ExpenseFilterForm
-    expenses = ""
+    expenses = None
     # if 'project' or 'payee' or 'category' in request.GET:
     if request.GET.__len__() > 0:
-        expenses = Expense.objects.all()
+        expenses = Expense.objects.prefetch_related(
+            "project", "payee", "category"
+        ).all()
 
         if "project" in request.GET and is_valid_queryparam(request.GET.get("project")):
             q = request.GET.get("project")
-            expenses.filter(project__id__iexact=q).prefetch_related(
-                "project", "payee", "category"
-            ).all()
+            expenses.filter(project__id__iexact=q)
 
         if "payee" in request.GET and is_valid_queryparam(request.GET.get("payee")):
             q = request.GET.get("payee")
-            expenses.filter(payee__id__iexact=q).prefetch_related(
-                "project", "payee", "category"
-            ).all()
+            expenses.filter(payee__id__iexact=q)
 
         if "category" in request.GET and is_valid_queryparam(
-            request.GET.get("category")
+                request.GET.get("category")
         ):
             q = request.GET.get("category")
-            expenses.filter(category__id=q).prefetch_related(
-                "project", "payee", "category"
-            ).all()
+            expenses.filter(category__id=q)
 
         expenses.annotate(Sum("amount", distinct=True))
 

@@ -68,5 +68,5 @@ urlpatterns = [
     path("payees/<int:pk>/update/", views.PayeeUpdate.as_view(), name="payee-update"),
     path("payees/<int:pk>/delete/", views.PayeeDelete.as_view(), name="payee-delete"),
     # Filter URLs
-    path("expense/filter/", views.expense_list),
+    path("expense/filter/", views.expense_list, name="expense_report"),
 ]
