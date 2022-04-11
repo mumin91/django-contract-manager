@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 from decouple import config, Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -40,10 +41,11 @@ INSTALLED_APPS = [
     "expense.apps.ExpenseConfig",
     "crispy_forms",  # Crispy forms app
     "django_filters",  # Django filter app
-    "debug_toolbar",  # Django filter app
+    "debug_toolbar",  # Django debug_toolbar app
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",  # Django Debug Toolbar
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",  # whitenoise
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -52,7 +54,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",  # Django Debug Toolbar
 ]
 
 ROOT_URLCONF = "contractor.urls"
@@ -149,6 +150,10 @@ LOGOUT_REDIRECT_URL = "/accounts/login/"
 # Crispy forms settings
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 CRISPY_CLASS_CONVERTERS = {"dateinput": "datepicker"}
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # Activate Django-Heroku.
 # Configure Django App for Heroku.
