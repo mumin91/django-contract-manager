@@ -6,7 +6,7 @@ from .models import ExpenseCategory, Expense
 class ExpenseCategoryCreateForm(forms.ModelForm):
     class Meta:
         model = ExpenseCategory
-        fields = ('title',)
+        fields = ("title",)
 
         # def __init__(self, *args, **kwargs):
         #     self.user = kwargs.pop('user')
@@ -14,7 +14,6 @@ class ExpenseCategoryCreateForm(forms.ModelForm):
 
 
 class ExpenseFilterForm(forms.ModelForm):
-
     class Meta:
         model = Expense
-        fields = ['project', 'category', 'payee']
+        fields = ["project", "category", "payee"]
