@@ -17,15 +17,22 @@ class DashboardView(LoginRequiredMixin, View):
 
     def get(self, request):
         number_of_projects = Project.objects.count()
+
         total_expense_last_seven_days = (
             Expense.objects.values("amount")
                 .filter(created_at__gte=timezone.now() - timedelta(days=7))
                 .aggregate(total=Sum("amount"))
         )
 
+        most_expensive_category = ExpenseCategory.objects.only("title").order_by("expense__amount").last()
+
+        total_income = Project.objects.values("income").aggregate(total=Sum("income"))
+
         context = {
             "total_number_of_projects": number_of_projects,
             "total_expense_last_seven_days": total_expense_last_seven_days["total"],
+            "most_expensive_category": most_expensive_category,
+            "total_income": total_income["total"],
         }
         return render(request, self.template_name, context)
 
