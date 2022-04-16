@@ -27,11 +27,11 @@
                     {#                    </div>#}
                     <div class="card-body">
                         <div class="row-grid">
-                            <form method="get" class="mb-4 form-inline">
-                            {{ form|crispy }}
+                            <form method="get" class="mb-4 form-inline justify-content-between">
+                                {{ form|crispy }}
 
-                            <input class="btn btn-success" type="submit"/>
-                        </form>
+                                <input class="btn btn-success" type="submit"/>
+                            </form>
                         </div>
                         <div class="row">
                             <div class="table-responsive mb-4">
@@ -42,8 +42,7 @@
                                         <th scope="col">Project</th>
                                         <th scope="col">Category</th>
                                         <th scope="col">Payee</th>
-                                        <th scope="col">Reached Amount</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">Amount</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -53,19 +52,19 @@
                                             <td>{{ expense.project }}</td>
                                             <td>{{ expense.category }}</td>
                                             <td>{{ expense.payee }}</td>
-                                            <td>{{ expense.total_amount }}</td>
-                                            <td>
-                                                {#                                        <span class="d-inline-block">#}
-                                                {#                                               <a href="{% url 'costlimit-update' cost_limit.id %}">#}
-                                                {#                                                   <i class="fa fa-edit m-1"></i>#}
-                                                {#                                               </a>#}
-                                                {#                                        </span>#}
-                                                {#                                        <span class="d-inline-block">#}
-                                                {#                                               <a href="{% url 'costlimit-delete' cost_limit.id %}">#}
-                                                {#                                                   <i class="fa fa-trash m-1"></i>#}
-                                                {#                                               </a>#}
-                                                {#                                        </span>#}
-                                            </td>
+                                            <td>{{ expense.amount }}</td>
+{#                                            <td>#}
+{#                                                                                        <span class="d-inline-block">#}
+{#                                                                                               <a href="{% url 'costlimit-update' cost_limit.id %}">#}
+{#                                                                                                   <i class="fa fa-edit m-1"></i>#}
+{#                                                                                               </a>#}
+{#                                                                                        </span>#}
+{#                                                <span class="d-inline-block">#}
+{#                                                                                               <a href="{% url 'costlimit-delete' cost_limit.id %}">#}
+{#                                                                                                   <i class="fa fa-trash m-1"></i>#}
+{#                                                                                               </a>#}
+{#                                                                                        </span>#}
+{#                                            </td>#}
                                         </tr>
                                     {% empty %}
                                         <tr>
