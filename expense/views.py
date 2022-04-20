@@ -6,7 +6,13 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+    DetailView,
+)
 
 from expense.forms import ExpenseFilterForm
 from expense.models import *
@@ -20,11 +26,13 @@ class DashboardView(LoginRequiredMixin, View):
 
         total_expense_last_seven_days = (
             Expense.objects.values("amount")
-                .filter(created_at__gte=timezone.now() - timedelta(days=7))
-                .aggregate(total=Sum("amount"))
+            .filter(created_at__gte=timezone.now() - timedelta(days=7))
+            .aggregate(total=Sum("amount"))
         )
 
-        most_expensive_category = ExpenseCategory.objects.only("title").order_by("expense__amount").last()
+        most_expensive_category = (
+            ExpenseCategory.objects.only("title").order_by("expense__amount").last()
+        )
 
         total_income = Project.objects.values("income").aggregate(total=Sum("income"))
 
@@ -235,7 +243,7 @@ def expense_list(request):
             expenses.filter(payee__id__iexact=q)
 
         if "category" in request.GET and is_valid_queryparam(
-                request.GET.get("category")
+            request.GET.get("category")
         ):
             q = request.GET.get("category")
             expenses.filter(category__id=q)
