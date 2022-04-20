@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from expense.forms import ExpenseFilterForm
 from expense.models import *
@@ -42,6 +42,11 @@ class ProjectListView(LoginRequiredMixin, ListView):
     context_object_name = "projects"
     template_name = "expense/project_list.html"
     paginate_by = 10
+
+
+class ProjectDetailView(DetailView):
+    template_name = "expense/project_detail.html"
+    model = Project
 
 
 class ProjectCreate(LoginRequiredMixin, CreateView):

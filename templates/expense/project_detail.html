@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Create New Project
+{% endblock %}
+
+{% block brand %}
+    New Project
+{% endblock %}
+{% block body %}
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body">
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt--7">
+        <!-- Table -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0 d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0">Project Detail</h3>
+                        <a href="{% url 'project_list' %}">
+                            <button class="btn btn-default">Back</button>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4 bold">Title: </div>
+                            <div class="col-6">{{ object.title }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 bold">Description</div>
+                            <div class="col-6">{{ project.description }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 bold">Status</div>
+                            <div class="col-6">{{ project.status }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 bold">Income</div>
+                            <div class="col-6">{{ project.income }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 bold">Profit</div>
+                            <div class="col-6">{{ project.profit }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 bold">Title</div>
+                            <div class="col-6">{{ project.title }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 bold">Start Date</div>
+                            <div class="col-6">{{ project.start_date }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 bold">End Date</div>
+                            <div class="col-6">{{ project.end_date }}</div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
